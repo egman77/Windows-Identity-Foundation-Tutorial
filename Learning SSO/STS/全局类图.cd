@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="所有联合请求的入口方法">
+    <Position X="0.5" Y="4.917" Height="0.381" Width="2.117" />
+  </Comment>
+  <Comment CommentText="验证服务功能类">
+    <Position X="0.923" Y="0.5" Height="0.546" Width="1.944" />
+  </Comment>
+  <Comment CommentText="注销实体视图模型 ">
+    <Position X="4.202" Y="3.661" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="自定义令牌服务类">
+    <Position X="4.113" Y="0.881" Height="0.381" Width="1.7" />
+  </Comment>
+  <Class Name="STS.RouteConfig">
+    <Position X="4" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="STS.MvcApplication">
+    <Position X="4" Y="6.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="STS.Controllers.AuthenticationController">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\AuthenticationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="STS.Core.AuthenticationService">
+    <Position X="0.5" Y="1.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAECCBAQAAAAAAABAIAAAAgAAQAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\AuthenticationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="STS.Core.CustomTokenService">
+    <Position X="4" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Core\CustomTokenService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="STS.Models.LogoutViewModel">
+    <Position X="4.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LogoutViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
