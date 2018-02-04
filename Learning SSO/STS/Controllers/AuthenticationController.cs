@@ -12,6 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 using STS.Core;
 using System.Security.Principal;
 
+
 namespace STS.Controllers
 {
     /// <summary>
@@ -139,7 +140,18 @@ namespace STS.Controllers
         public ActionResult Index()
         {
             var authenticator = new AuthenticationService();
-            return authenticator.ProcessRequest();
+            ActionResult result=null;
+            try
+            {
+                result = authenticator.ProcessRequest();
+            }
+            catch (Exception ex)
+            {
+                return View("error",ex);
+               // throw;
+            }
+
+            return result;
         }
 	}
 }
