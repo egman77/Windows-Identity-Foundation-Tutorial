@@ -150,3 +150,10 @@ $RECYCLE.BIN/
 # Mac crap
 .DS_Store
 Learning SSO/packages/
+/Learning SSO/.vs/Learning SSO/v15/Server/sqlite3/db.lock
+/Learning SSO/.vs/Learning SSO/v15/Server/sqlite3/storage.ide
+/Learning SSO/.vs/Learning SSO/v15/Server/sqlite3/storage.ide-shm
+/Learning SSO/.vs/Learning SSO/v15/Server/sqlite3/storage.ide-wal
+/Learning SSO/.vs/config/applicationhost.config
+/.vs/slnx.sqlite
+/.vs/ProjectSettings.json
