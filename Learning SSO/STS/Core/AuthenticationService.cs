@@ -108,7 +108,7 @@ namespace STS.Core
         /// 注销
         /// Find out which realms the user is signed in - sign them out from all of them, and return to @replyTo
         /// </summary>
-        /// <param name="replyTo">Redirect to this address after signout is done</param>
+        /// <param name="replyTo">当注销后,要重定向的地址 Redirect to this address after signout is done</param>
         /// <param name="relyingPartyUrl">依赖方的URL</param>
         /// <returns>A bit of html, which renders images with signout urls for all domains.</returns>
         private ActionResult SignOut(string replyTo, string relyingPartyUrl)
