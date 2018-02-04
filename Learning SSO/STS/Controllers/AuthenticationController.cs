@@ -28,8 +28,15 @@ namespace STS.Controllers
     /// 验证服务类
     /// </summary>
     public class AuthenticationService {
+
+        /// <summary>
+        /// 注销
+        /// </summary>
         public const string SignOutLiteral = "wsignout1.0";
         public const string SignOutCleanupLiteral = "wsignoutcleanup1.0";
+        /// <summary>
+        /// 登录
+        /// </summary>
         public const string SignInLiteral = "wsignin1.0";
         public const string RealmLiteral = "wtrealm";
         public const string ReplyLiteral = "wreply";
@@ -88,6 +95,8 @@ namespace STS.Controllers
             var relyingPartyUrl = HttpContext.Current.Request.UrlReferrer.ToString();
             // Get reply to address
             var reply = message.GetParameter(ReplyLiteral);
+            
+            //从消息头得到操作类型
             // Sign out, if the action or wa-parameter is "wsignout1.0", and sign in otherwise
             return message.Action == SignOutLiteral ? SignOut(reply, relyingPartyUrl) : SignIn(relyingPartyUrl);
         }
@@ -97,20 +106,34 @@ namespace STS.Controllers
         /// Find out which realms the user is signed in - sign them out from all of them, and return to @replyTo
         /// </summary>
         /// <param name="replyTo">Redirect to this address after signout is done</param>
-        /// <param name="relyingPartyUrl"></param>
+        /// <param name="relyingPartyUrl">依赖方的URL</param>
         /// <returns>A bit of html, which renders images with signout urls for all domains.</returns>
         private ActionResult SignOut(string replyTo, string relyingPartyUrl)
         {
+            //注销
             // First, remove the session authentication cookie for the STS
             FederatedAuthentication.SessionAuthenticationModule.SignOut();
+
+            //取声明标识符
             var ci = (ClaimsIdentity)HttpContext.Current.User.Identity;
+
+            //找到注销的声明标识符
             // Get all urls where the user has signed in previously, and make them into a list of strings with the format "{url}?wa=wsignoutcleanup1.0"
             var logoutUrls = ci.FindAll(i => i.Type == ClaimTypes.Uri).Select(i => string.Format("{0}?wa={1}", i.Value, SignOutCleanupLiteral)).ToList();
+           
+            //构造视图模型
             // Construct a viewmodel from the logout urls and replyto address
             var model = new LogoutViewModel { LogoutUrls = logoutUrls, ReplyTo = replyTo };
+
+            //
             // Add relying party url if it isn't in there, because in some cases, a client might call signout even though the local STS cookie has expired 
             var relyingPartyUrlCleanup = string.Format("{0}?wa={1}", relyingPartyUrl, SignOutCleanupLiteral);
-            if (!logoutUrls.Contains(relyingPartyUrlCleanup)) logoutUrls.Add(relyingPartyUrlCleanup);
+
+            //如果不包含,则加入新构造的视图模型 
+            if (!logoutUrls.Contains(relyingPartyUrlCleanup))
+                logoutUrls.Add(relyingPartyUrlCleanup);
+
+            //构造返回数据
             // Build a viewresult object and return that
             var viewResult = new ViewResult
             {
@@ -120,12 +143,22 @@ namespace STS.Controllers
             return viewResult;
         }
 
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="replyToAddress">要回复的地址</param>
+        /// <returns></returns>
         private ActionResult SignIn(string replyToAddress)
         {
+            //取用户,已登录和第一次登录
             var user = HttpContext.Current.User.Identity.IsAuthenticated ? PreviouslyAuthenticated(replyToAddress) : AuthenticateAndCreateCookie(replyToAddress);
+            //取令牌服务配置类(有缓存吗?)
             var config = new SecurityTokenServiceConfiguration("http://sts.local", new X509SigningCredentials(LoadCertificate()));
 
+            //联合被动令牌服务操作, 处理请求
             FederatedPassiveSecurityTokenServiceOperations.ProcessRequest(HttpContext.Current.Request, (ClaimsPrincipal) user, new CustomTokenService(config), HttpContext.Current.Response);
+            //设置http状态
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
