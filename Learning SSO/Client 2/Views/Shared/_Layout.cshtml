@@ -22,9 +22,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li><a href="http://sso.local/?wa=wsignin1.0&wreply=http://client2.local/&wtrealm=http://client2.local/">Login</a></li>
+                    <li><a href="http://localhost:59171/?wa=wsignin1.0&wreply=http://localhost:59819/&wtrealm=http://localhost:59819/">Login</a></li>
                     @if (User.Identity.IsAuthenticated) { 
-                        <li><a href="http://sso.local/?wa=wsignout1.0&wreply=http://client2.local/">Logout</a></li>
+                        <li><a href="http://localhost:59171/?wa=wsignout1.0&wreply=http://localhost:59819/">Logout</a></li>
                     }
                 </ul>
             </div>
