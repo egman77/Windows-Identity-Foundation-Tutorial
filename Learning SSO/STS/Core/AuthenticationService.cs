@@ -94,8 +94,12 @@ namespace STS.Core
         {
             // Pull the request apart
             var message = WSFederationMessage.CreateFromUri(HttpContext.Current.Request.Url);
+
+            //依赖方的地址
             // Get the relying party url
             var relyingPartyUrl = HttpContext.Current.Request.UrlReferrer.ToString();
+
+            //需要重定向到的地址
             // Get reply to address
             var reply = message.GetParameter(ReplyLiteral);
 
