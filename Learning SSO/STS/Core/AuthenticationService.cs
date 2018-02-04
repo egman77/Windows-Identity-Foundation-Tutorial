@@ -78,7 +78,7 @@ namespace STS.Core
         {
             //创建声明主角
             var claimsPrincipal = new ClaimsPrincipal(user);
-            //创建会话安全令牌
+            //创建会话安全令牌,保存一年
             var sessionSecurityToken = new SessionSecurityToken(claimsPrincipal, TimeSpan.FromDays(365));
             //写入会话安全令牌
             FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(sessionSecurityToken);
