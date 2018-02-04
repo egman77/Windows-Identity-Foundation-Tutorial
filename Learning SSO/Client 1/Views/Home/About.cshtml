@@ -10,5 +10,7 @@
     <p>Hello, you're now authenticated as a Forms Authenticated user. What about if we look at your claims?</p>
     var s = (ClaimsIdentity)User.Identity;
     var name = s.Name;
-    <p>*Poof* Done, and from the claims identity we can decipher that you logged in as @name</p>
+    <p>*Poof* Done, and from the claims identity we can decipher that you logged in as <span style="font-size:32px">@name</span>
+    
+    </p>
 }
