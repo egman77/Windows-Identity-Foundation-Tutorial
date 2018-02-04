@@ -76,8 +76,11 @@ namespace STS.Core
         /// <returns></returns>
         private static ClaimsPrincipal SaveToCookie(ClaimsIdentity user)
         {
+            //创建声明主角
             var claimsPrincipal = new ClaimsPrincipal(user);
+            //创建会话安全令牌
             var sessionSecurityToken = new SessionSecurityToken(claimsPrincipal, TimeSpan.FromDays(365));
+            //写入会话安全令牌
             FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(sessionSecurityToken);
             return claimsPrincipal;
         }
@@ -151,7 +154,7 @@ namespace STS.Core
         /// <returns></returns>
         private ActionResult SignIn(string replyToAddress)
         {
-            //取用户,已登录和第一次登录
+            //取用户声明主角,要区分 已登录和第一次登录
             var user = HttpContext.Current.User.Identity.IsAuthenticated ? PreviouslyAuthenticated(replyToAddress) : AuthenticateAndCreateCookie(replyToAddress);
             //取令牌服务配置类(有缓存吗?)
             var config = new SecurityTokenServiceConfiguration("http://sts.local", new X509SigningCredentials(LoadCertificate()));
