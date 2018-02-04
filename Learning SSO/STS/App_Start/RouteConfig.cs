@@ -8,6 +8,7 @@ namespace STS
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            //使用mvc属性路由
             routes.MapMvcAttributeRoutes();
         }
     }

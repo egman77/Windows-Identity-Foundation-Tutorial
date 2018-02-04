@@ -14,12 +14,18 @@ using System.Security.Principal;
 
 namespace STS.Controllers
 {
+    /// <summary>
+    /// 注销的视图模型
+    /// </summary>
     public class LogoutViewModel
     {
         public List<string> LogoutUrls;
         public string ReplyTo;
     }
     
+    /// <summary>
+    /// 验证服务类
+    /// </summary>
     public class AuthenticationService {
         public const string SignOutLiteral = "wsignout1.0";
         public const string SignOutCleanupLiteral = "wsignoutcleanup1.0";
@@ -69,6 +75,7 @@ namespace STS.Controllers
         }
 
         /// <summary>
+        /// 算出
         /// Figure out, if the user wants to sign in or sign out, and do the correct path based on that
         /// </summary>
         /// <returns></returns>
@@ -85,6 +92,7 @@ namespace STS.Controllers
         }
 
         /// <summary>
+        /// 注销
         /// Find out which realms the user is signed in - sign them out from all of them, and return to @replyTo
         /// </summary>
         /// <param name="replyTo">Redirect to this address after signout is done</param>
@@ -122,6 +130,7 @@ namespace STS.Controllers
     }
 
     /// <summary>
+    /// 验证控制器
     /// Entry point into our STS
     /// </summary>
     public class AuthenticationController : Controller
